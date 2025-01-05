@@ -5,8 +5,12 @@ import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.Trajectory;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
+import com.acmerobotics.roadrunner.TrajectoryBuilder;
+import com.acmerobotics.roadrunner.TrajectoryBuilderParams;
 import com.acmerobotics.roadrunner.Vector2d;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -16,6 +20,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
+@Autonomous(name = "redDragAuto")
 public class redDragAuto extends LinearOpMode {
     public class linearSlide {
         private DcMotorEx linearSlide;
@@ -109,9 +114,24 @@ public class redDragAuto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, startingPose);
         claw claw = new claw(hardwareMap);
         linearSlide linearSlide = new linearSlide(hardwareMap);
-        //Go Hang the first preloaded block
         TrajectoryActionBuilder traj1 = drive.actionBuilder(startingPose)
-                .setTangent(Math.toRadians(90))
-                .splineTo(new Vector2d(0, -32.5), Math.toRadians(180));
+                .splineTo(new Vector2d(0, -32.5), Math.toRadians(180))
+                .afterDisp(0.1, claw.setPosition(1))
+                .afterDisp(0.1, linearSlide.up())
+                .stopAndAdd(linearSlide.middle())
+                .stopAndAdd(claw.setPosition(0))
+                .stopAndAdd(linearSlide.up())
+                .strafeToConstantHeading(new Vector2d(25, -36))
+                .afterDisp(1, linearSlide.down())
+                .splineToConstantHeading(new Vector2d(35, -5), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(48, -5, Math.toRadians(270)), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(48, -54, Math.toRadians(270)), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(48, -12, Math.toRadians(270)), Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(58, -12), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(58, -54, Math.toRadians(270)), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(58, -12, Math.toRadians(270)), Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(62, -12), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(62, -54, Math.toRadians(270)), Math.toRadians(270));
+                //.splineToConstantHeading(new Vector2d(63, -40), Math.toRadians(90))
     }
 }

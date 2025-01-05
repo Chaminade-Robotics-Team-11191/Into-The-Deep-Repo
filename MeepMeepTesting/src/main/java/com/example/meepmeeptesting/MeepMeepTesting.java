@@ -1,10 +1,14 @@
 package com.example.meepmeeptesting;
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
+
+import org.jetbrains.annotations.NotNull;
 
 public class MeepMeepTesting {
     public static void main(String[] args) {
@@ -16,8 +20,18 @@ public class MeepMeepTesting {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(31.1875, -63.5, Math.toRadians(90)))
-                .setTangent(Math.toRadians(90))
                 .splineTo(new Vector2d(0, -32.5), Math.toRadians(180))
+                .strafeToConstantHeading(new Vector2d(25, -36))
+                .splineToConstantHeading(new Vector2d(35, -5), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(48, -5, Math.toRadians(270)), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(48, -54, Math.toRadians(270)), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(48, -12, Math.toRadians(270)), Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(58, -12), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(58, -54, Math.toRadians(270)), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(58, -12, Math.toRadians(270)), Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(62, -12), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(62, -54, Math.toRadians(270)), Math.toRadians(270))
+                //.splineToConstantHeading(new Vector2d(63, -40), Math.toRadians(90))
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
