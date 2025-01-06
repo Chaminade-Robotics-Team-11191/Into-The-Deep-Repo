@@ -8,6 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+
 @TeleOp(name = "wow what an amazing day")
 public class mecanumdrivewheels extends LinearOpMode {
     //Initializing hardware
@@ -34,6 +38,7 @@ public class mecanumdrivewheels extends LinearOpMode {
         jackismadidk = hardwareMap.get(Servo.class, "jackismadidk");
         odocomputer = hardwareMap.get(GoBildaPinpointDriver.class, "odocomputer");
         odocomputer.resetPosAndIMU();
+        odocomputer.setPosition(new Pose2D(DistanceUnit.INCH, 53.5, -63, AngleUnit.DEGREES, 180));
         linearslide1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         linearslide1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         linearslide2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
