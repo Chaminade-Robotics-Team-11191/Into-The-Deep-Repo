@@ -94,39 +94,30 @@ public class redDragAuto extends LinearOpMode {
         }
         public Action setPosition(float pos) {
             return new Action() {
-                private boolean atPosition = false;
+                private boolean atPosition = true;
                 @Override
                 public boolean run(@NonNull TelemetryPacket telemetryPacket) {
                     claw.setPosition(pos);
-                    if (claw.getPosition() == pos) {
-                        atPosition = true;
-                    }
                     return atPosition;
                 }
             };
         }
         public Action open() {
             return new Action() {
-                private boolean atPosition = false;
+                private boolean atPosition = true;
                 @Override
                 public boolean run(@NonNull TelemetryPacket telemetryPacket) {
                     claw.setPosition(0.6);
-                    if (claw.getPosition() == 0.6) {
-                        atPosition = true;
-                    }
                     return atPosition;
                 }
             };
         }
         public Action close() {
             return new Action() {
-                private boolean atPosition = false;
+                private boolean atPosition = true;
                 @Override
                 public boolean run(@NonNull TelemetryPacket telemetryPacket) {
                     claw.setPosition(0.4);
-                    if (claw.getPosition() == 0.4) {
-                        atPosition = true;
-                    }
                     return atPosition;
                 }
             };
