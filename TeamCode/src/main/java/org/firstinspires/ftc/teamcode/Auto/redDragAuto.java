@@ -130,9 +130,8 @@ public class redDragAuto extends LinearOpMode {
         claw claw = new claw(hardwareMap);
         linearSlide linearSlide = new linearSlide(hardwareMap);
         TrajectoryActionBuilder trajectory = drive.actionBuilder(startingPose)
+                .afterDisp(0.001, linearSlide.up())
                 .strafeToLinearHeading(new Vector2d(0, -32.5), Math.toRadians(180))
-                .afterDisp(0.1, claw.close())
-                .afterDisp(0.1, linearSlide.up())
                 .stopAndAdd(linearSlide.middle())
                 .stopAndAdd(claw.open())
                 .stopAndAdd(linearSlide.up())
