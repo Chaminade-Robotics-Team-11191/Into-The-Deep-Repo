@@ -66,11 +66,12 @@ public class mecanumdrivewheels extends LinearOpMode {
                     lagrangepoints.setPower(0);
                 }
                 if (gamepad2.y) {
-                    jackismadidk.setPosition(0.6);
+                    jackismadidk.setPosition(0.5);
                 }
                 else if (gamepad2.a) {
                     jackismadidk.setPosition(0.4);
                 }
+                telemetry.addData("jackismadidk", jackismadidk.getPosition());
                 //Linear Slide
                 post = linearslide1.getCurrentPosition();
                 telemetry.addData("post", post);
